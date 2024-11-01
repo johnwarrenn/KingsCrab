@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dquqnvr7pq3g0"]
+[gd_scene load_steps=15 format=3 uid="uid://dquqnvr7pq3g0"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_hxl0k"]
 [ext_resource type="Texture2D" uid="uid://dgeeqc8eel3df" path="res://assets/Crab Enemy Camacebra Games/Crab Enemy Camacebra Games/Idle/Crab1.png" id="1_n62ee"]
@@ -10,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://bv56a6b22proo" path="res://assets/Crab Enemy Camacebra Games/Crab Enemy Camacebra Games/Attack/AttackDown/Crab_AttackDown1.png" id="8_832vt"]
 [ext_resource type="Texture2D" uid="uid://cew2occrb4r20" path="res://assets/Crab Enemy Camacebra Games/Crab Enemy Camacebra Games/Moving/CrabMoving2.png" id="8_ugdlp"]
 [ext_resource type="Texture2D" uid="uid://u06o8ywls0w8" path="res://assets/Crab Enemy Camacebra Games/Crab Enemy Camacebra Games/Moving/CrabMoving3.png" id="9_cobxn"]
-[ext_resource type="Texture2D" uid="uid://67nk4r2xahmj" path="res://assets/Crab Enemy Camacebra Games/Crab Enemy Camacebra Games/Attack/Crab_Attack3.png" id="9_lbsfr"]
 [ext_resource type="Texture2D" uid="uid://dtbkem3vyphil" path="res://assets/Crab Enemy Camacebra Games/Crab Enemy Camacebra Games/Attack/Crab_Attack4.png" id="10_4gxji"]
 [ext_resource type="Texture2D" uid="uid://cpeipncg5kkr6" path="res://assets/Crab Enemy Camacebra Games/Crab Enemy Camacebra Games/Moving/CrabMoving4.png" id="10_smkxk"]
 
@@ -49,14 +48,11 @@ animations = [{
 "texture": ExtResource("8_832vt")
 }, {
 "duration": 1.0,
-"texture": ExtResource("9_lbsfr")
-}, {
-"duration": 1.0,
 "texture": ExtResource("10_4gxji")
 }],
 "loop": true,
 "name": &"jump",
-"speed": 10.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -91,6 +87,7 @@ texture_filter = 1
 scale = Vector2(0.711111, 0.711111)
 sprite_frames = SubResource("SpriteFrames_rfx5x")
 animation = &"jump"
+frame_progress = 0.251861
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
