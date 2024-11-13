@@ -1,7 +1,9 @@
 extends CharacterBody2D
 
-const acceleration = 50
-const friction = 70
+@export var acceleration = 30
+@export var friction = 50
+
+
 
 @export var slow_time_scale = 0.1
 @export var arrow_duration = 0.5
@@ -17,7 +19,7 @@ const friction = 70
 
 @export var lunge_direction = Vector2.ZERO
 @export var lunge_speed = 400
-@export var move_speed = 150
+@export var move_speed = 120
 @export var jump_height : float
 @export var jump_time_to_peak: float
 @export var jump_time_to_descent: float
@@ -30,7 +32,7 @@ const friction = 70
 
 func _ready() -> void:
 	var velocity := Vector2.ZERO
-	animated_sprite_2D.play("idle")
+	
 	
 	jump_timer = Timer.new()
 	jump_timer.one_shot = true
@@ -41,6 +43,7 @@ func _ready() -> void:
 	
 	
 func _physics_process(delta):
+	
 	velocity.y += gravity() * delta
 	var horizontal := 0.0
 	if !lunge_active:
@@ -50,10 +53,15 @@ func _physics_process(delta):
 		elif Input.is_action_pressed("ui_right"):
 			horizontal += 1.0
 			player_animation("run")
+		if horizontal != 0:
+			var target_velocity = Vector2(horizontal, 0) * move_speed
+			velocity.x = velocity.move_toward(target_velocity, acceleration).x
+			
 		else:
+			add_friction(delta)
 			player_animation("idle")
-	
-		velocity.x = horizontal * move_speed
+		
+		
 	
 	if is_on_floor():
 		lunge_active = false
@@ -70,8 +78,16 @@ func _physics_process(delta):
 	move_and_slide()
 	update_animation()
 
+
+	
 func gravity() -> float:
 	return jump_gravity if velocity.y < 0.0 else fall_gravity
+	
+func accelerate(direction):
+	velocity.x = velocity.move_toward(move_speed * direction, acceleration).x
+	
+func add_friction(delta):
+	velocity.x = velocity.move_toward(Vector2.ZERO, friction).x
 	
 func jump():
 	if max_jumps == 1 and Engine.time_scale == 1:
@@ -86,6 +102,7 @@ func jump():
 		lunge_towards_arrow()
 		particle_animation()
 		stop_double_jump()
+	
 		
 func reset_jumps():
 	max_jumps = 1
@@ -102,9 +119,9 @@ func stop_double_jump():
 func lunge_towards_arrow():
 	var angle = arrow.global_rotation
 	var lunge_direction = Vector2.UP.rotated(angle)
-	velocity += lunge_direction * lunge_speed
+	velocity = lunge_direction * lunge_speed
 	lunge_timer.start(lunge_duration)
-	print(velocity)
+	
 	
 func reset_time():
 	Engine.time_scale = 1.0
