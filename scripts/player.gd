@@ -24,7 +24,9 @@ extends CharacterBody2D
 @export var jump_time_to_peak: float
 @export var jump_time_to_descent: float
 
-
+@onready var jump_sfx = $JumpSFX
+@onready var lunge_sfx = $LungeSFX
+@onready var walk_sfx = $WalkSFX
 @onready var jump_velocity : float = ((2.0 * jump_height) / jump_time_to_peak) * -1
 @onready var jump_gravity: float = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak)) * -1
 @onready var fall_gravity: float = ((-2.0 * jump_height) / (jump_time_to_descent * jump_time_to_descent)) * -1
@@ -50,6 +52,8 @@ func _physics_process(delta):
 		if Input.is_action_pressed("ui_left"):
 			horizontal -= 1.0
 			player_animation("run")
+			
+			
 		elif Input.is_action_pressed("ui_right"):
 			horizontal += 1.0
 			player_animation("run")
@@ -67,6 +71,10 @@ func _physics_process(delta):
 		lunge_active = false
 		reset_jumps()
 		reset_time()
+		
+	if not is_on_floor() and max_jumps == 1:
+		max_jumps = 0
+		
 	
 	if Input.is_action_just_pressed("jump"):
 		jump()
@@ -93,6 +101,7 @@ func jump():
 	if max_jumps == 1 and Engine.time_scale == 1:
 		max_jumps -= 1
 		velocity.y = jump_velocity
+		jump_sfx.play()
 	elif max_jumps == 0:
 		max_jumps -= 1
 		slow_time()
@@ -120,6 +129,7 @@ func lunge_towards_arrow():
 	var angle = arrow.global_rotation
 	var lunge_direction = Vector2.UP.rotated(angle)
 	velocity = lunge_direction * lunge_speed
+	lunge_sfx.play()
 	lunge_timer.start(lunge_duration)
 	
 	

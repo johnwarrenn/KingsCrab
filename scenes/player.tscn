@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dquqnvr7pq3g0"]
+[gd_scene load_steps=20 format=3 uid="uid://dquqnvr7pq3g0"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_hxl0k"]
 [ext_resource type="Texture2D" uid="uid://dgeeqc8eel3df" path="res://assets/Crab Enemy Camacebra Games/Crab Enemy Camacebra Games/Idle/Crab1.png" id="1_n62ee"]
@@ -12,6 +12,11 @@
 [ext_resource type="Texture2D" uid="uid://u06o8ywls0w8" path="res://assets/Crab Enemy Camacebra Games/Crab Enemy Camacebra Games/Moving/CrabMoving3.png" id="9_cobxn"]
 [ext_resource type="Texture2D" uid="uid://dtbkem3vyphil" path="res://assets/Crab Enemy Camacebra Games/Crab Enemy Camacebra Games/Attack/Crab_Attack4.png" id="10_4gxji"]
 [ext_resource type="Texture2D" uid="uid://cpeipncg5kkr6" path="res://assets/Crab Enemy Camacebra Games/Crab Enemy Camacebra Games/Moving/CrabMoving4.png" id="10_smkxk"]
+[ext_resource type="AudioStream" uid="uid://dte0rij6bn373" path="res://assets/RPG_Essentials_Free/10_UI_Menu_SFX/029_Decline_09.wav" id="13_npp53"]
+[ext_resource type="AudioStream" uid="uid://dkha8gh0af8if" path="res://assets/RPG_Essentials_Free/12_Player_Movement_SFX/88_Teleport_02.wav" id="14_e8msg"]
+[ext_resource type="AudioStream" uid="uid://cb1dle3pfa728" path="res://assets/RPG_Essentials_Free/12_Player_Movement_SFX/08_Step_rock_02.wav" id="15_7fgcw"]
+[ext_resource type="Script" path="res://scripts/arrow.gd" id="15_a3qv4"]
+[ext_resource type="Texture2D" uid="uid://oukpsa4x75xw" path="res://assets/simple_symbols_2.png" id="16_geg28"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_rfx5x"]
 animations = [{
@@ -92,3 +97,27 @@ frame_progress = 0.251861
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_uk7qj")
+
+[node name="JumpSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_npp53")
+volume_db = 2.971
+
+[node name="LungeSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_e8msg")
+pitch_scale = 2.56
+
+[node name="WalkSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("15_7fgcw")
+pitch_scale = 0.51
+
+[node name="Arrow" type="Node2D" parent="."]
+visible = false
+script = ExtResource("15_a3qv4")
+
+[node name="Sprite2D" type="Sprite2D" parent="Arrow"]
+texture_filter = 1
+position = Vector2(0, -14)
+scale = Vector2(0.375, 0.75)
+texture = ExtResource("16_geg28")
+region_enabled = true
+region_rect = Rect2(31.8413, 399.891, 16.0724, 16.0183)
