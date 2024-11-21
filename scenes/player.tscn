@@ -101,14 +101,17 @@ shape = SubResource("CapsuleShape2D_uk7qj")
 [node name="JumpSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("13_npp53")
 volume_db = 2.971
+bus = &"sfx"
 
 [node name="LungeSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("14_e8msg")
 pitch_scale = 2.56
+bus = &"sfx"
 
 [node name="WalkSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("15_7fgcw")
 pitch_scale = 0.51
+bus = &"sfx"
 
 [node name="Arrow" type="Node2D" parent="."]
 visible = false

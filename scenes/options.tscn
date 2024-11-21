@@ -1,4 +1,16 @@
-[gd_scene format=3 uid="uid://qfsug56d5pfe"]
+[gd_scene load_steps=6 format=3 uid="uid://qfsug56d5pfe"]
+
+[ext_resource type="Script" path="res://scripts/options.gd" id="1_xgmo0"]
+[ext_resource type="FontFile" uid="uid://cihryafk4rmrl" path="res://assets/Abaddon_Fonts_v1.2/Abaddon_Fonts_v1.2/Abaddon Bold.ttf" id="2_vt78y"]
+[ext_resource type="PackedScene" uid="uid://dl48pbubmb1fa" path="res://scenes/volume_slider.tscn" id="3_he4ip"]
+
+[sub_resource type="Theme" id="Theme_r8yw0"]
+default_font = ExtResource("2_vt78y")
+default_font_size = 32
+
+[sub_resource type="Theme" id="Theme_tsn84"]
+default_font = ExtResource("2_vt78y")
+default_font_size = 32
 
 [node name="Options" type="Control"]
 layout_mode = 3
@@ -7,3 +19,50 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_xgmo0")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -114.0
+offset_top = -53.5
+offset_right = 114.0
+offset_bottom = 53.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Difficulty" type="CheckButton" parent="VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_r8yw0")
+text = "Hard Mode"
+
+[node name="MusicLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vt78y")
+text = "Music"
+
+[node name="Music" parent="VBoxContainer" instance=ExtResource("3_he4ip")]
+layout_mode = 2
+bus_name = "music"
+
+[node name="SFXLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_vt78y")
+text = "SFX"
+
+[node name="SFX" parent="VBoxContainer" instance=ExtResource("3_he4ip")]
+layout_mode = 2
+bus_name = "sfx"
+
+[node name="Back" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_tsn84")
+text = "Back"
+
+[connection signal="toggled" from="VBoxContainer/Difficulty" to="." method="_on_difficulty_toggled"]
+[connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_back_pressed"]

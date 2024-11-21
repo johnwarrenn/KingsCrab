@@ -17,12 +17,12 @@ extends CharacterBody2D
 @onready var lunge_timer: Timer
 @onready var lunge_active = false
 
-@export var lunge_direction = Vector2.ZERO
 @export var lunge_speed = 400
 @export var move_speed = 120
 @export var jump_height : float
 @export var jump_time_to_peak: float
 @export var jump_time_to_descent: float
+
 
 @onready var jump_sfx = $JumpSFX
 @onready var lunge_sfx = $LungeSFX
@@ -42,6 +42,8 @@ func _ready() -> void:
 	lunge_timer = Timer.new()
 	lunge_timer.one_shot = true
 	add_child(lunge_timer)
+	process_mode = self.PROCESS_MODE_PAUSABLE
+	
 	
 	
 func _physics_process(delta):
@@ -83,9 +85,12 @@ func _physics_process(delta):
 	if jump_timer.is_stopped():
 		reset_time()
 		
+		
+		
 	move_and_slide()
 	update_animation()
-
+	
+	
 
 	
 func gravity() -> float:

@@ -1,0 +1,68 @@
+[gd_scene load_steps=5 format=3 uid="uid://drubxi6n7ps6m"]
+
+[ext_resource type="Script" path="res://scripts/game_options.gd" id="1_dx4bh"]
+[ext_resource type="FontFile" uid="uid://cihryafk4rmrl" path="res://assets/Abaddon_Fonts_v1.2/Abaddon_Fonts_v1.2/Abaddon Bold.ttf" id="2_rml7q"]
+[ext_resource type="PackedScene" uid="uid://dl48pbubmb1fa" path="res://scenes/volume_slider.tscn" id="3_ubxkw"]
+
+[sub_resource type="Theme" id="Theme_tsn84"]
+default_font = ExtResource("2_rml7q")
+default_font_size = 32
+
+[node name="GameOptions" type="Control"]
+z_as_relative = false
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = -29.0
+offset_bottom = -29.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.265, 0.265)
+size_flags_horizontal = 4
+script = ExtResource("1_dx4bh")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -114.0
+offset_top = -53.5
+offset_right = 114.0
+offset_bottom = 53.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="MusicLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_rml7q")
+text = "Music"
+
+[node name="Music" parent="VBoxContainer" instance=ExtResource("3_ubxkw")]
+layout_mode = 2
+bus_name = "music"
+
+[node name="SFXLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_rml7q")
+text = "SFX"
+
+[node name="SFX" parent="VBoxContainer" instance=ExtResource("3_ubxkw")]
+layout_mode = 2
+bus_name = "sfx"
+
+[node name="Exit" type="Button" parent="VBoxContainer"]
+z_index = 1
+layout_mode = 2
+theme = SubResource("Theme_tsn84")
+text = "Exit"
+
+[connection signal="pressed" from="VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="VBoxContainer/Exit" to="." method="_on_back_pressed"]
